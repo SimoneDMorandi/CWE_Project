@@ -19,6 +19,7 @@ f_uc  = 'centreline_u.csv';
 f_vc  = 'centreline_v.csv';
 f_lat = 'lateral_u.csv';
 
+
 % DIMAT reference files (Fluent XY).
 f_cpm_ref = 'dimat_cp_medio_parete.txt';
 f_cpr_ref = 'dimat_cp_rms_parete.txt';
@@ -37,6 +38,7 @@ UC_ref  = read_xy_safe(f_uc_ref);    % [x             Mean Ux]
 UC_ref2 = read_xy_safe('durao_med_ux_y=0.txt');
 UC_ref3 = read_xy_safe('LES_3D_med_ux_y=0.txt');
 UC_ref4 = read_xy_safe('Lyn_med_ux_y=0.txt');
+
 
 
 %% Figure 1: mean Cp on the body.
@@ -77,21 +79,22 @@ end
 if ~isempty(LAT)
     figure; grid on
     plot(LAT(:,3), LAT(:,1), '.-', 'LineWidth',1.0);   % U/U vs y/B
+    yticks([])
     ylabel('y/B'); xlabel('U/U'); title('Lateral profile (mean)');
 end
 
 %% Fig 6: lateral RMS profile.
 if ~isempty(LAT)
-    figure; grid on
-    plot(LAT(:,5), LAT(:,1), '.-', 'LineWidth',1.0);   % u_rms/U vs y/B
+    figure; grid on; 
+    plot(LAT(:,2), LAT(:,1), '.-', 'LineWidth',1.0);   % u_rms/U vs y/B
     ylabel('y/B'); xlabel('u_{rms}/U'); title('Lateral profile (RMS u)');
 end
 
 %% Fig 7: mean u_x on the centreline.
 figure; grid on; hold on;
-%if ~isempty(UC)
-%    plot(UC(:,1), UC(:,2), '.-', 'LineWidth',1.0, 'DisplayName','K-omega');
-%end
+if ~isempty(UC)
+    plot(UC(:,1), UC(:,2), '.-', 'LineWidth',1.0, 'DisplayName','K-omega');
+end
 if ~isempty(UC_ref)
     plot(UC_ref(:,1), UC_ref(:,2), '.-', 'LineWidth',1.0, 'DisplayName','DIMAT');
 end
