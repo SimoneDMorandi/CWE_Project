@@ -1,19 +1,19 @@
 % plot_reports.m
 % Reads Fluent report-definition .out files and plots Time Step vs the
-% reported quantity. One figure is opened per file so they can be viewed
-% side by side.
+% reported quantity.
 %
 % Each file is assumed to share the same structure:
 %   "header line in quotes"
 %   (parenthesised column labels)
 %   timeStep   flowTime   report-def-value
+
 clear
 clc
 close all
  
-%% --- Files to process ---
+%% Files to process.
 % Column 1: filename on disk
-% Column 2: nice label for the y-axis / title
+% Column 2: label for the y-axis / title
 reports = {
     'drag.out',     'Report Def Drag'
     'lift.out',     'Report Def Lift'
@@ -22,12 +22,12 @@ reports = {
     'umean.out',    'Report Def u_{mean}'
 };
  
-%% --- Loop over every report file ---
+%% Looping over every report file.
 for k = 1:size(reports, 1)
     filename = reports{k, 1};
     label    = reports{k, 2};
  
-    % Skip gracefully if a file is missing rather than aborting the whole run
+    % Skipping.
     if exist(filename, 'file') ~= 2
         warning('File not found, skipping: %s', filename);
         continue
@@ -40,7 +40,7 @@ for k = 1:size(reports, 1)
         continue
     end
  
-    %% --- Plot ---
+    %% Plotting
     figure('Name', [label ' vs Time Step'], 'NumberTitle', 'off');
  
     plot(timeStep, value, 'b-o', 'LineWidth', 0.5, 'MarkerSize', 5, ...
@@ -53,10 +53,9 @@ for k = 1:size(reports, 1)
     xlim([min(timeStep) max(timeStep)]);
 end
  
-%% ----------------------------------------------------------------------
-%% Local function: parse one Fluent report file
-%% ----------------------------------------------------------------------
+%% Utilities
 function [timeStep, value] = readReport(filename)
+% Parses one Fluent file.
     fid = fopen(filename, 'r');
     if fid == -1
         error('Cannot open file: %s', filename);
@@ -68,12 +67,12 @@ function [timeStep, value] = readReport(filename)
     while ~feof(fid)
         line = strtrim(fgetl(fid));
  
-        % Skip empty lines, header strings, and parenthesised column labels
+        % Skipping empty lines, header strings, and parenthesised column labels.
         if isempty(line) || line(1) == '"' || line(1) == '('
             continue
         end
  
-        % Read three numeric columns: timeStep  flowTime  report-def-value
+        % Reading three numeric columns: timeStep  flowTime  report-def-value.
         vals = sscanf(line, '%f %f %f');
         if numel(vals) == 3
             timeStep(end+1) = vals(1); %#ok<AGROW>

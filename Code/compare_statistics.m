@@ -1,58 +1,45 @@
 % compare_statistics.m
 % --------------------------------------------------------------------------
-% Overlays the phase-averaged statistics (CSV files produced by
-% phase_statistics.m) against the reference "dimat" Fluent XY exports,
+% Overlays the phase-averaged statistics against the reference Fluent XY exports,
 % plotting matching quantities on the same figures.
-%
-% CSV inputs (from phase_statistics.m):
-%   cp_stats.csv      x/B , Cp_mean , Cp_rms
-%   centreline_u.csv  x/B , Ux/U mean , Ux/U rms
-%   centreline_v.csv  x/B , Vmean/U
-%   lateral_u.csv     y/B , U mean , U/U , u_rms , u_rms/U
-%
-% Reference inputs (Fluent XY plots, prefix "dimat"):
-%   dimat_cp_medio_parete.txt   curve length , Mean Cp        -> Fig 1
-%   dimat_cp_rms_parete.txt     curve length , RMS  Cp        -> Fig 2
-%   dimat_med_ux_y=0.txt        x            , Mean Ux/U      -> Fig 3
-%
-% Figures 4-7 (centreline u_rms, centreline V, lateral profiles) have no
-% reference among the uploaded files, so the CSV result is plotted alone.
-%
-% Missing files are skipped with a warning, so the script runs even if you
-% only have a subset of the inputs in the current folder.
 % --------------------------------------------------------------------------
+
 clear 
 close all
 clc
-%% ---- user parameters ----
-B    = 1.0;     % normalisation length  (must match phase_statistics.m)
-Uref = 1.0;     % reference velocity     (must match phase_statistics.m)
 
-% CSV files (computed phase statistics)
+
+%% Parameters
+B    = 1.0;     % Normalisation length. 
+Uref = 1.0;     % Reference velocity.
+
+% CSV files.
 f_cp  = 'cp_stats.csv';
 f_uc  = 'centreline_u.csv';
 f_vc  = 'centreline_v.csv';
 f_lat = 'lateral_u.csv';
 
-% dimat reference files (Fluent XY). Adjust names if yours differ; the loader
-% also auto-tries the '=' <-> '_' filename variants for the centreline file.
+% DIMAT reference files (Fluent XY).
 f_cpm_ref = 'dimat_cp_medio_parete.txt';
 f_cpr_ref = 'dimat_cp_rms_parete.txt';
 f_uc_ref  = 'dimat_med_ux_y=0.txt';
 
-%% ---- load everything (missing files are skipped) ----
+%% Loading CSV files.
 CP  = loadcsv(f_cp);      % [x/B  Cp_mean  Cp_rms]
 UC  = loadcsv(f_uc);      % [x/B  Ux/U     u_rms/U]
 VC  = loadcsv(f_vc);      % [x/B  V/U]
 LAT = loadcsv(f_lat);     % [y/B  U  U/U  u_rms  u_rms/U]
 
+%% Loading XY files and more references files.
 CPM_ref = read_xy_safe(f_cpm_ref);   % [curve length  Mean Cp]
 CPR_ref = read_xy_safe(f_cpr_ref);   % [curve length  RMS  Cp]
 UC_ref  = read_xy_safe(f_uc_ref);    % [x             Mean Ux]
 UC_ref2 = read_xy_safe('durao_med_ux_y=0.txt');
 UC_ref3 = read_xy_safe('LES_3D_med_ux_y=0.txt');
 UC_ref4 = read_xy_safe('Lyn_med_ux_y=0.txt');
-%% ---- Fig 1: mean Cp on the body ----
+
+
+%% Figure 1: mean Cp on the body.
 figure; hold on; grid on
 if ~isempty(CP)
     plot(CP(:,1),CP(:,2),'.-', 'LineWidth',1.0, 'DisplayName','K-omega');
@@ -62,7 +49,7 @@ if ~isempty(CPM_ref)
 end
 xlabel('x/B'); ylabel('C_p (mean)'); title('Mean C_p'); legend('Location','best');
 
-%% ---- Fig 2: RMS Cp on the body ----
+%% Figure 2: RMS Cp on the body.
 figure; hold on; grid on
 if ~isempty(CP)
     plot(CP(:,1),        CP(:,3),      '.-', 'LineWidth',1.0, 'DisplayName','K-omega');
@@ -72,34 +59,35 @@ if ~isempty(CPR_ref)
 end
 xlabel('x/B'); ylabel('Cp_{rms}'); title('RMS(CP)'); legend('Location','best');
 
-%% ---- Fig 3: RMS streamwise velocity on the centreline (CSV only) ----
+%% Figure 3: RMS streamwise velocity on the centreline.
 if ~isempty(UC)
     figure; grid on
     plot(UC(:,1), UC(:,3), '.-', 'LineWidth',1.0);
     xlabel('x/B'); ylabel('u_{rms}/U'); title('RMS U on centreline');
 end
 
-%% ---- Fig 4: mean transverse velocity on the centreline (CSV only) ----
+%% Figure 4: mean transverse velocity on the centreline.
 if ~isempty(VC)
     figure; grid on
     plot(VC(:,1), VC(:,2), '.-', 'LineWidth',1.0);
     xlabel('x/B'); ylabel('V_{mean}/U'); title('Mean V on centreline');
 end
 
-%% ---- Fig 5: lateral mean profile (CSV only) ----
+%% Figure 5: lateral mean profile.
 if ~isempty(LAT)
     figure; grid on
     plot(LAT(:,3), LAT(:,1), '.-', 'LineWidth',1.0);   % U/U vs y/B
     ylabel('y/B'); xlabel('U/U'); title('Lateral profile (mean)');
 end
 
-%% ---- Fig 6: lateral RMS profile (CSV only) ----
+%% Fig 6: lateral RMS profile.
 if ~isempty(LAT)
     figure; grid on
     plot(LAT(:,5), LAT(:,1), '.-', 'LineWidth',1.0);   % u_rms/U vs y/B
     ylabel('y/B'); xlabel('u_{rms}/U'); title('Lateral profile (RMS u)');
 end
-%% ---- Fig 7: Mean(u_x) on y= 0.
+
+%% Fig 7: mean u_x on the centreline.
 figure; grid on; hold on;
 %if ~isempty(UC)
 %    plot(UC(:,1), UC(:,2), '.-', 'LineWidth',1.0, 'DisplayName','K-omega');
@@ -120,9 +108,9 @@ xlabel('x/B'); ylabel('Mean u_{x}'); title('Mean u_{x} on y = 0'); legend('Locat
 
 disp('Done. Comparison figures created.');
 
-%% ==========================================================================
+%% Utilities.
 function M = loadcsv(fname)
-% Reads a writematrix CSV into a numeric matrix; [] (with a warning) if absent.
+% Reads a writematrix CSV into a numeric matrix.
     M = [];
     if exist(fname, 'file') ~= 2
         warning('CSV not found: %s  (skipped).', fname); return
@@ -135,8 +123,7 @@ function M = loadcsv(fname)
 end
 
 function d = read_xy_safe(fname)
-% Wrapper around read_xy: skips (with a warning) if the file is missing, and
-% auto-tries the '=' <-> '_' filename variants (e.g. y=0 vs y_0).
+% Wrapper around read_xy.
     if exist(fname, 'file') ~= 2
         cands = { strrep(fname, '=', '_'), strrep(fname, '_y_0', '_y=0') };
         found = '';
@@ -153,7 +140,6 @@ end
 
 function d = read_xy(fname)
 % Parses a Fluent XY-plot file: keeps only lines that are two numbers,
-% skipping the (title ...) / (labels ...) / ((...)) header lines.
     fid = fopen(fname, 'r');
     if fid < 0, error('Cannot open %s', fname); end
     d = [];
