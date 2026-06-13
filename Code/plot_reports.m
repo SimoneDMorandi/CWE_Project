@@ -16,7 +16,7 @@ close all
 % Column 2: label for the y-axis / title
 reports = {
     'drag.out',     'Report Def Drag'
-    'lift.out',     'Report Def Lift'
+    'full_lift.out',     'Report Def Lift'
     'moment.out',   'Report Def Moment'
     'ulateral.out', 'Report Def u_{lateral}'
     'umean.out',    'Report Def u_{mean}'
@@ -42,15 +42,17 @@ for k = 1:size(reports, 1)
  
     %% Plotting
     figure('Name', [label ' vs Time Step'], 'NumberTitle', 'off');
- 
-    plot(timeStep, value, 'b-o', 'LineWidth', 0.5, 'MarkerSize', 5, ...
+    
+    plot(timeStep, value, 'b-o', 'LineWidth', 0.1, 'MarkerSize', 5, ...
          'MarkerFaceColor', 'b');
- 
     xlabel('Time Step',                'FontSize', 12);
     ylabel(label,                      'FontSize', 12);
     title([label ' vs Time Step'],     'FontSize', 14);
     grid on;
-    xlim([min(timeStep) max(timeStep)]);
+    xPad = 0.06 * (max(timeStep) - min(timeStep));
+    yPad = 0.10 * (max(value)    - min(value));
+    xlim([min(timeStep) - xPad,  max(timeStep) + xPad]);
+    ylim([min(value)    - yPad,  max(value)    + yPad]);
 end
  
 %% Utilities
