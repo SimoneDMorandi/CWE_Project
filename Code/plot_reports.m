@@ -1,19 +1,15 @@
 % plot_reports.m
+% --------------------------------------------------------------------------
 % Reads Fluent report-definition .out files and plots Time Step vs the
 % reported quantity.
 %
-% Each file is assumed to share the same structure:
-%   "header line in quotes"
-%   (parenthesised column labels)
-%   timeStep   flowTime   report-def-value
+% --------------------------------------------------------------------------
 
 clear
 clc
 close all
  
 %% Files to process.
-% Column 1: filename on disk
-% Column 2: label for the y-axis / title
 reports = {
     'drag.out',     'Report Def Drag'
     'full_lift.out',     'Report Def Lift'

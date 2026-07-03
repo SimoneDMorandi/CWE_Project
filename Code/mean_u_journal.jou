@@ -1,0 +1,302 @@
+file/read-case square_2d_VS.gz-5-ph_1.cas.h5
+surface/line-surface centre-line-two 1.1 0 20 0 
+
+; ===================== Phase 1 =====================
+file/read-data square_2d_VS.gz-5-ph_1.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_1"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 2 =====================
+file/read-data square_2d_VS.gz-5-ph_2.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_2"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 3 =====================
+file/read-data square_2d_VS.gz-5-ph_3.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_3"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 4 =====================
+file/read-data square_2d_VS.gz-5-ph_4.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_4"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 5 =====================
+file/read-data square_2d_VS.gz-5-ph_5.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_5"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 6 =====================
+file/read-data square_2d_VS.gz-5-ph_6.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_6"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 7 =====================
+file/read-data square_2d_VS.gz-5-ph_7.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_7"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 8 =====================
+file/read-data square_2d_VS.gz-5-ph_8.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_8"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 9 =====================
+file/read-data square_2d_VS.gz-5-ph_9.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_9"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 10 =====================
+file/read-data square_2d_VS.gz-5-ph_10.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_10"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 11 =====================
+file/read-data square_2d_VS.gz-5-ph_11.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_11"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 12 =====================
+file/read-data square_2d_VS.gz-5-ph_12.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_12"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 13 =====================
+file/read-data square_2d_VS.gz-5-ph_13.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_13"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 14 =====================
+file/read-data square_2d_VS.gz-5-ph_14.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_14"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 15 =====================
+file/read-data square_2d_VS.gz-5-ph_15.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_15"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 16 =====================
+file/read-data square_2d_VS.gz-5-ph_16.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_16"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 17 =====================
+file/read-data square_2d_VS.gz-5-ph_17.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_17"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 18 =====================
+file/read-data square_2d_VS.gz-5-ph_18.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_18"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 19 =====================
+file/read-data square_2d_VS.gz-5-ph_19.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_19"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,
+
+; ===================== Phase 20 =====================
+file/read-data square_2d_VS.gz-5-ph_20.dat.h5
+/plot/plot/
+yes
+"mean_ux_ph_20"
+yes
+no
+no
+mean-x-velocity
+no
+yes
+no
+centre-line-two
+,

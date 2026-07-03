@@ -1,0 +1,16 @@
+file/read-case square_2d_VS.gz-5-ph_1.cas.h5
+surface/line-surface centre-line-two 1.1 0 20 0
+; ===================== Phase 1 =====================
+file/read-data square_2d_VS.gz-5-ph_1.dat.h5
+/plot/plot/
+yes
+"x_coord"
+yes
+no
+no
+x-coordinate
+no
+yes
+no
+centre-line-two
+,
