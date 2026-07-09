@@ -1,4 +1,4 @@
-%% compare_statistics.m
+%% compare.m
 % --------------------------------------------------------------------------
 % Overlays the phase-averaged statistics against the reference Fluent XY exports,
 % plotting matching quantities on the same figures.
